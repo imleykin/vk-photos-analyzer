@@ -10,14 +10,17 @@ class Page extends Component {
 	render() {
 		const { photos, year } = this.props;
 		return (
-			<div>
-				<div>
-					<button onClick={this.handleYearUpdate}>2018</button>
-					<button onClick={this.handleYearUpdate}>2017</button>
-				</div>
+			<div className="ib page">
 				<p>
-					У тебя {photos.length} фото за {year} год
+					<button className="btn" onClick={this.handleYearUpdate}>
+						2018
+					</button>{' '}
+					<button className="btn" onClick={this.handleYearUpdate}>
+						2017
+					</button>{' '}
 				</p>
+				<h3>{year} год</h3>
+				<p>У тебя {photos.length} фото.</p>
 			</div>
 		);
 	}
