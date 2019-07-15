@@ -4,11 +4,14 @@ import PropTypes from 'prop-types';
 class Page extends Component {
 	handleYearUpdate = e => {
 		const newYear = +e.currentTarget.innerText;
-		this.props.setYear(newYear);
+		this.props.getPhotos(newYear);
 	};
 
 	render() {
-		const { photos, year } = this.props;
+		const { photos, year, isFetching /*error*/ } = this.props;
+
+		// console.log(photos);
+
 		return (
 			<div className="ib page">
 				<p>
@@ -18,15 +21,30 @@ class Page extends Component {
 					<button className="btn" onClick={this.handleYearUpdate}>
 						2017
 					</button>{' '}
+					<button className="btn" onClick={this.handleYearUpdate}>
+						2016
+					</button>{' '}
+					<button className="btn" onClick={this.handleYearUpdate}>
+						2015
+					</button>{' '}
+					<button className="btn" onClick={this.handleYearUpdate}>
+						2014
+					</button>{' '}
 				</p>
 				<h3>{year} год</h3>
 				<p>У тебя {photos.length} фото.</p>
+				<p>{isFetching ? 'Загрузка' : null}</p>
+				<div>
+					{photos.map(photo => (
+						<img key={photo.id} src={photo.photo_130} alt={photo.text} />
+					))}
+				</div>
 			</div>
 		);
 	}
 }
 
-Page.propType = {
+Page.propTypes = {
 	photos: PropTypes.array.isRequired,
 	year: PropTypes.number.isRequired,
 };
